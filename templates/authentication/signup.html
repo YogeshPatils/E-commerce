@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block header %} 
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        Bootstrap
+      </a>
+    </div>
+  </nav>
+    {% endblock header %}
+
+    {% block body %} 
+    <div class="container w-75 mx-auto mt-5 border border-dark d-flex flex-column flex-grow-1 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+        <h1 class="w-custom text-center mx-auto pt-1 bg-dark text-light">Sign Up</h1>
+        <form action="" method="post" class="w-custom p-4 border mx-auto  d-flex flex-column shadow-lg mb-5 bg-body-tertiary rounded" >
+            {% csrf_token %}
+            {{form.first_name|as_crispy_field}}
+            
+            {{form.last_name|as_crispy_field}}
+            
+            {{form.username|as_crispy_field}}
+            <div class="invalid-feedback uname"></div>
+            
+            {{form.phone|as_crispy_field}}
+            <div class="invalid-feedback phone"></div>
+            
+            {{form.email|as_crispy_field}}
+            <div class="invalid-feedback email"></div>
+            
+            {{form.date_of_birth|as_crispy_field}}
+
+            
+            {{form.gender|as_crispy_field}}
+            
+            {{form.password1|as_crispy_field}}
+            <div class="invalid-feedback pwd1"></div>
+
+            
+            {{form.password2|as_crispy_field}}
+            <div class="invalid-feedback pwd2"></div>
+            
+            <button type="submit" class="btn btn-dark mt-4 mx-0">Sign up</button>
+        </form>
+        <a href="{% url 'signin' %}" class="align-self-center">Already have an account ? Sign in</a>
+        <a href="{% provider_login_url 'google' %}" class="mt-5 align-self-center"><button class="btn border border-dark"> <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" alt="Google Logo" width="24" height="24">
+          Sign up with google</button></a>
+    </div>
+    {% endblock body %}
+
+    {% block script %}
+    {{ block.super }}
+    <script src="{% static 'js/index.js' %}"></script>
+    
+    {% endblock script %}

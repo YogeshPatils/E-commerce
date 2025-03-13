@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+{% load socialaccount %}
+
+{% load crispy_forms_tags %}
+{% block header %}
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24"
+        class="d-inline-block align-text-top">
+      E-Commerce
+    </a>
+  </div>
+</nav>
+{% endblock header %}
+
+{% block body %}
+<div
+  class="container signin-container border border-dark mt-5 d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+  <h1 class="w-custom text-center pt-1 bg-dark text-light">Sign In</h1>
+  <form action="" method="post"
+    class="form-signin border mt-0 w-custom d-flex flex-column shadow-sm p-4 mb-5 bg-body-tertiary rounded">
+    {% csrf_token %}
+    {{form.username|as_crispy_field}}
+
+    {{form.password|as_crispy_field}}
+    <button type="submit" class="mt-2 btn btn-dark">Sign in</button>
+    <a class="align-self-center mt-3" href="{% url 'identify' %}">Forgot password ?</a>
+    <a class="align-self-center mt-3" href="{% url 'signup' %}">Don't have an account ? Sign up</a>
+    <a href="{% provider_login_url 'google' %}" class="mt-1 align-self-center"><button
+        class="btn border border-dark"><img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" alt="Google Logo" width="24" height="24">
+        Sign up with google</button></a>
+
+  </form>
+</div>
+{% endblock body %}

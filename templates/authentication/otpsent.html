@@ -1,0 +1,6 @@
+{% if user %}
+<h1>the otp has been sent to the {{user.email}}</h1>
+<a href="{% url 'otpcheck' user.username %}">verify otp here</a>
+{% else %}
+<h1>User not found</h1>
+{% endif %}

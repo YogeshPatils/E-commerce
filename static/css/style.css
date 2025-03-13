@@ -1,0 +1,52 @@
+*{
+    padding: 0;margin: 0;box-sizing: border-box;
+    
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body{
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container form div{
+    display: flex;
+    flex-direction: column;
+}
+
+.container form div input,#id_gender{
+    border: 1px solid rgba(36, 35, 35, 0.3);
+    
+}
+.signin-container form div label{
+    margin-top: 2em;
+    
+}
+.signin-container form div input:last-child{
+    margin-bottom: 2em;
+    
+}
+.hidden{
+    display: none;
+}
+footer ul{
+    list-style: none;
+    
+}
+footer{
+    display: flex;
+    justify-content: center;
+}
+
+footer ul li{
+display: inline-block;
+}
+.w-custom{
+    width: 40%;
+}
+.w-custom-text{
+    width: 37%;
+}
+
