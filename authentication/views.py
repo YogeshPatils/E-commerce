@@ -149,37 +149,36 @@ class ResetPasswordView(View):
         messages.error(request,'Invalid Credentials')
         return redirect('resetpwd',user.username)
     
-@csrf_exempt
-def signUpValidate(request):
-    import json
-    import re
-    data=json.loads(request.body)
-    username = data.get('username','')
-    phone = data.get('phone','')
-    email = data.get('email','')
-    pwd2 = data.get('repassword','')
-    pwd1 = data.get('password','')
+# @csrf_exempt
+# def signUpValidate(request):
+#     import json
+#     import re
+#     data=json.loads(request.body)
+#     username = data.get('username','')
+#     phone = data.get('phone','')
+#     email = data.get('email','')
+#     pwd2 = data.get('repassword','')
+#     pwd1 = data.get('password','')
 
-    if len(username)<=3:
-        return JsonResponse({"user_name_len_error":"username must be atleast 3 charachters"})
-    if User.objects.filter(username=username).exists():
-        return JsonResponse({"user_name_error":"username already has been taken"})
-    if re.search(r'[^a-zA-Z0-9@.+\-_]',username):
-        return JsonResponse({"user_name_char_error":"Letters, digits and @/./+/-/_ only"})
-    # return JsonResponse({"usertrue":True})
-    if not re.match(r'^[6-9][0-9]{9}$',phone):
-        return JsonResponse({"phone_error":"invalid phone number"})
-    # return JsonResponse({"phonetrue":True})
-    if not re.match(r'^[a-zA-Z0-9._]+\@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,}$',email):
-        return JsonResponse({"email_error":"invalid email"})
-    # return JsonResponse({"emailtrue":True})
-    if pwd1!=pwd2:
-        return JsonResponse({"pwd_match_error":"Password do not match"})
-    return JsonResponse({"formtrue":True})
+#     if len(username)<=3:
+#         return JsonResponse({"user_name_len_error":"username must be atleast 3 charachters"})
+#     if User.objects.filter(username=username).exists():
+#         return JsonResponse({"user_name_error":"username already has been taken"})
+#     if re.search(r'[^a-zA-Z0-9@.+\-_]',username):
+#         return JsonResponse({"user_name_char_error":"Letters, digits and @/./+/-/_ only"})
+#     # return JsonResponse({"usertrue":True})
+#     if not re.match(r'^[6-9][0-9]{9}$',phone):
+#         return JsonResponse({"phone_error":"invalid phone number"})
+#     # return JsonResponse({"phonetrue":True})
+#     if not re.match(r'^[a-zA-Z0-9._]+\@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,}$',email):
+#         return JsonResponse({"email_error":"invalid email"})
+#     # return JsonResponse({"emailtrue":True})
+#     if pwd1!=pwd2:
+#         return JsonResponse({"pwd_match_error":"Password do not match"})
+#     return JsonResponse({"formtrue":True})
 
 
 
-@csrf_exempt
 def userNameValidateView(request):
     import json
     import re 
@@ -195,7 +194,6 @@ def userNameValidateView(request):
 
     
 
-@csrf_exempt
 def phoneValidateView(request):
     import json
     import re
@@ -205,7 +203,6 @@ def phoneValidateView(request):
         return JsonResponse({"phone_error":"invalid phone number"})
     return JsonResponse({"phonetrue":True})
 
-@csrf_exempt
 def emailValidateView(request):
     import json
     import re
@@ -215,7 +212,6 @@ def emailValidateView(request):
         return JsonResponse({"email_error":"invalid email"})
     return JsonResponse({"emailtrue":True})
 
-@csrf_exempt
 def passwordValidate(request):
     import json
     data=json.loads(request.body)
@@ -224,7 +220,6 @@ def passwordValidate(request):
         return JsonResponse({"pwd_error":"Your password must contain at least 8 characters and one capital letter and one special number"})
     return JsonResponse({"pwdtrue":True})
 
-@csrf_exempt
 def passwordMatchView(request):
     import json
     data=json.loads(request.body)
