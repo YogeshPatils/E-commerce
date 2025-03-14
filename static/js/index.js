@@ -2,6 +2,12 @@ let uname = document.getElementById('id_username')
 let fname = document.getElementById('id_first_name')
 fname.focus()
 
+function getCSRFToken() {
+    let csrfToken = document.querySelector("[name=csrfmiddlewaretoken]");
+    return csrfToken ? csrfToken.value : "";
+}
+
+
 let button = document.querySelector('.btn');
 button.disabled = true
 
@@ -31,12 +37,17 @@ let uname_element = document.getElementById('id_username');
 let uname_feedback = document.querySelector('.uname');
 uname_element.addEventListener('input', (e) => {
     uname_value = e.target.value;
-    fetch('/usernamevalidate/', {
+    fetch('/authentication/usernamevalidate/', {
+        method: 'POST',
         body: JSON.stringify({
             username: uname_value,
 
         }),
-        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':getCSRFToken()
+        },
+        credentials:'same-origin',
     }).then(res => res.json()).then(data => {
         uname_feedback.style.display = "none";
         uname_feedback.textContent = "";
@@ -89,11 +100,14 @@ let phone_feedback = document.querySelector('.phone');
 
 phone_element.addEventListener('input', (e) => {
     phone_value = e.target.value;
-    fetch('/phonevalidate/', {
-        body: JSON.stringify({
-            phone: phone_value,
-        }),
+    fetch('/authentication/phonevalidate/', {
         method: 'POST',
+        credentials:'same-origin',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':getCSRFToken()
+        },
+        body: JSON.stringify({phone: phone_value}),
     }).then(res => res.json()).then(data => {
         phone_feedback.style.display = "none";
         phone_feedback.textContent = "";
@@ -120,11 +134,16 @@ let email_feedback = document.querySelector('.email');
 
 email_element.addEventListener('input', (e) => {
     email_value = e.target.value;
-    fetch('/emailvalidate/', {
+    fetch('/authentication/emailvalidate/', {
+        method: 'POST',
         body: JSON.stringify({
             email: email_value,
         }),
-        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':getCSRFToken()
+        },
+        credentials:'same-origin',
     }).then(res => res.json()).then(data => {
         email_feedback.style.display = "none";
         email_feedback.textContent = "";
@@ -151,11 +170,16 @@ let pwd_feedback = document.querySelector('.pwd1');
 
 pwd_element.addEventListener('input', (e) => {
     pwd_value = e.target.value;
-    fetch('/pwdvalidate/', {
+    fetch('/authentication/pwdvalidate/', {
+        method: 'POST',
         body: JSON.stringify({
             password: pwd_value,
         }),
-        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':getCSRFToken()
+        },
+        credentials:'same-origin',
     }).then(res => res.json()).then(data => {
         pwd_feedback.style.display = "none";
         pwd_feedback.textContent = "";
@@ -202,11 +226,16 @@ pwd2_element.addEventListener('input', (e) => {
     }
 
 
-    fetch('/pwdvalidate/', {
+    fetch('/authentication/pwdvalidate/', {
         body: JSON.stringify({
             password: pwd_value,
             repassword: pwd2_value,
         }),
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':getCSRFToken()
+        },
+        credentials:'same-origin',
         method: 'POST',
     }).then(res => res.json()).then(data => {
 
