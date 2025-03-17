@@ -66,11 +66,12 @@ class SignInView(View):
                 login(request,user)
                 messages.success(request,f'Signed in successfully {user.username}')
                 return redirect('home')
-            return redirect('signin')    
+            return redirect('signin')
+        messages.error(request,f'Invalid Credentials')
+        return redirect('signin')    
         
 
 class HomeView(View):
-    @method_decorator(login_required)
     def get(self,request,*args,**kwargs):
         return render(request,'authentication/home.html')
 
