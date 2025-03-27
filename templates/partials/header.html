@@ -20,14 +20,14 @@
       </div>
       {%if user.is_authenticated %}
       
-      <div class="dropdown ms-5">
+      <div class="dropdown ms-5 text-black">
         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Profile
+          {{user.username}}
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="{% url 'signout' %}">Sign out</a></li>
+          <li><a class="dropdown-item text-black" href="#">Action</a></li>
+          <li><a class="dropdown-item text-black" href="#">Another action</a></li>
+          <li><a class="dropdown-item text-black" href="{% url 'signout' %}">Sign out</a></li>
         </ul>
       </div>
       {% else %}
