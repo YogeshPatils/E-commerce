@@ -55,3 +55,6 @@ display: inline-block;
     width: 37%;
 }
 
+.overline-text{
+    text-decoration:line-through;
+}
