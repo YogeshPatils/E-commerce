@@ -3,3 +3,4 @@ crispy-bootstrap4
 django-allauth
 django-allauth[socialaccount]
 django-environ
+pillow
