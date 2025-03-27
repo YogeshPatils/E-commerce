@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views.decorators.csrf import csrf_exempt
 from .models import CustomUserModel
+from core.models import ProductVarient,Category
 from .forms import CustomUserForm,IdentifyUserForm,OtpForm
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm,SetPasswordForm
@@ -71,9 +72,7 @@ class SignInView(View):
         return redirect('signin')    
         
 
-class HomeView(View):
-    def get(self,request,*args,**kwargs):
-        return render(request,'authentication/home.html')
+
 
 class SignOutView(View):
     def get(self,request,*args,**kwargs):
@@ -149,7 +148,13 @@ class ResetPasswordView(View):
             return redirect('signin')
         messages.error(request,'Invalid Credentials')
         return redirect('resetpwd',user.username)
-    
+
+class ProductDetailView(View):
+    def get(self,request,*args,**kwargs):
+        slug=kwargs['slug']
+        product=ProductVarient.objects.get(slug=slug)
+        return render(request,'core/product_datail.html')
+
 # @csrf_exempt
 # def signUpValidate(request):
 #     import json
