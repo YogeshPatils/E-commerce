@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'core',
     'order',
+    'rest_framework',
 ]
 
 CRISPY_ALLOWED_TEMPLATES_PACKS='bootstrap4'
