@@ -41,12 +41,17 @@ class ProductVarient(models.Model):
     discount_per=models.IntegerField(null=True,blank=True)
     stock=models.IntegerField(null=True,blank=True)
     color=models.CharField(max_length=50,null=True,blank=True)
-    slug=models.SlugField(unique=True,blank=True,null=True)
-    def __str__(self,*args,**kwargs):
+    slug=models.SlugField(unique=True,blank=True,null=True,max_length=100)
+    def __str__(self):
+        if self.product:
+            return f"{self.product.name} - {self.attribute or ''} - {self.color or ''}"
+        return f"Variant {self.varient_id}"
+
+    def save(self, *args, **kwargs):
         if not self.slug and self.product:
-            self.slug=slugify(f'{self.product.name}-{self.attribute}-{self.color}')
-        super().save(*args,**kwargs)
-    
+            self.slug = slugify(f'{self.product.name}-{self.attribute}-{self.color}')
+        super().save(*args, **kwargs)
+
 
 
 
