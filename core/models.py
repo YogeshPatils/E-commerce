@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 class Category(models.Model):
@@ -40,6 +41,13 @@ class ProductVarient(models.Model):
     discount_per=models.IntegerField(null=True,blank=True)
     stock=models.IntegerField(null=True,blank=True)
     color=models.CharField(max_length=50,null=True,blank=True)
+    slug=models.SlugField(unique=True,blank=True,null=True)
+    def __str__(self,*args,**kwargs):
+        if not self.slug and self.product:
+            self.slug=slugify(f'{self.product.name}-{self.attribute}-{self.color}')
+        super().save(*args,**kwargs)
+    
+
 
 
 class ProductAttribute(models.Model):
