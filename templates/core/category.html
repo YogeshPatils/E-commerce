@@ -4,10 +4,18 @@
     <div class="row">
         {% for pd,vd in data %}
         <div class="card col-md-3 d-flex align-items-stretch">
+            {% if vd.image1 %}
             <img src="{{vd.image1.url}}" class="card-img-top mx-auto" style="width: 15rem;" alt="...">
+            {% else %}
+            <img src="" class="card-img-top mx-auto" style="width: 15rem;" alt="...">
+            {% endif %}
+
             <div class="card-body">
                 <h5 class="card-title">{{pd.name}}</h5>
                 <p class="card-text">{{pd.description}}</p>
+                <div class="badge text-bg-warning text-wrap m-2" style="width: 6rem;">
+                    Stock: {{vd.stock}}
+                  </div><br>
                 <a href="{% url 'product' vd.varient_id %}" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
