@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container flex-grow-1">
+    <h2>Cart for {{ order.user_id.username }}</h2>
+    <p>Total: ₹{{ order.total }}</p>
+    
+    {% for item in order_items %}
+        <div class="cart-item">
+            <p>Product: {{ item.product_id.name }}</p>
+            <p>Price: ₹{{ item.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Subtotal: ₹{{ item.subtotal }}</p>
+        </div>
+    {% endfor %}
+    
+</div>
+{% endblock body %}
