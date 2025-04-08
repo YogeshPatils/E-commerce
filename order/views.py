@@ -18,5 +18,5 @@ class AddToCartView(View):
         orderitem=OrderItem.objects.create(product_id=product,price=productvarient.sale_price,quantity=1)
         total=orderitem.quantity*orderitem.price
         Order.objects.create(order_item=orderitem,total=total,status="not placed",user_id=user)
-        return
+        return render(request,'cart.html',{})
 
