@@ -13,8 +13,9 @@
       
           
         </ul>
-        <form class="d-flex" style="width: 70em;" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" style="width: 70em;" role="search" method="get" action="{% url 'search' %}">
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
           <button class="btn btn-info" type="submit">Search</button>
         </form>
       </div>
